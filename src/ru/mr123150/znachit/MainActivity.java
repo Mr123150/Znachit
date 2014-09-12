@@ -17,10 +17,12 @@ public class MainActivity extends Activity {
 	
 	public static final String APP_PREFERENCES = "settings";
 	public static final String APP_PREFERENCES_COUNT = "Count";
+	public static final String APP_PREFERENCES_WORD = "Word";
 	
 	SharedPreferences settings;
 
 	int count=0;
+	String word="";
 	Button countBtn;
 	Button resetBtn;
 	TextView countTxt;
@@ -38,6 +40,7 @@ public class MainActivity extends Activity {
 		
 		if(settings.contains(APP_PREFERENCES_COUNT)) {
 		    count=settings.getInt(APP_PREFERENCES_COUNT, 0);
+		    word=settings.getString(APP_PREFERENCES_WORD, "Значит");
 		    countTxt.setText(Integer.toString(count));
 		}
 		

@@ -4,6 +4,6 @@
     <string name="app_name">Значит</string>
     <string name="action_settings">Настройки</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_settings">Settings Activity</string>
+    <string name="title_activity_settings">Настройки</string>
 
 </resources>
