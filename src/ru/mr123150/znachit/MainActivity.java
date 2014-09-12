@@ -2,6 +2,7 @@ package ru.mr123150.znachit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -92,7 +93,8 @@ public class MainActivity extends Activity {
 			editor.apply();
 	        return true;
 	    case R.id.action_settings:
-	        //
+	    	Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+	        startActivity(intent);
 	        return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
