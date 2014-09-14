@@ -1,5 +1,8 @@
 package ru.mr123150.znachit;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,14 +21,51 @@ public class MainActivity extends Activity {
 	public static final String APP_PREFERENCES = "settings";
 	public static final String APP_PREFERENCES_COUNT = "Count";
 	public static final String APP_PREFERENCES_WORD = "Word";
+	public static final String APP_PREFERENCES_TIMER = "Timer";
 	
 	SharedPreferences settings;
 
 	int count=0;
+	int timerCount=0;
+	
+	double minAverage=0;
+	double pairAverage=0;
+	
 	String word="";
+	
 	Button countBtn;
 	Button resetBtn;
-	TextView countTxt;
+	
+	TextView countText;
+	TextView timerText;
+	TextView averageText;
+	
+	Timer timer = new Timer();
+	
+	class timerTick extends TimerTask{
+		
+		@Override
+        public void run() {
+            MainActivity.this.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                	++timerCount;
+                	minAverage=(double)count/(double)timerCount*60;
+                	pairAverage=minAverage*95;
+                	
+        			timerText.setText("За " + Integer.toString(timerCount/60) + " мин. " + Integer.toString(timerCount%60) + " сек.");
+        			averageText.setText("(" + String.format("%.2f", minAverage) + " раз/мин., " + String.format("%.2f", pairAverage) + " раз за пару)");
+
+    				Editor editor = settings.edit();
+    				editor.putInt(APP_PREFERENCES_TIMER, timerCount);
+    				editor.apply();
+                }
+            });
+        }
+			
+		
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +76,24 @@ public class MainActivity extends Activity {
 		
 		countBtn = (Button)findViewById(R.id.add);
 		resetBtn = (Button)findViewById(R.id.reset);
-		countTxt = (TextView)findViewById(R.id.count);
+		countText = (TextView)findViewById(R.id.count);
+		timerText = (TextView)findViewById(R.id.time);
+		averageText = (TextView)findViewById(R.id.avg);
 		
-		if(settings.contains(APP_PREFERENCES_COUNT)) {
-		    count=settings.getInt(APP_PREFERENCES_COUNT, 0);
-		    word=settings.getString(APP_PREFERENCES_WORD, "Значит");
-		    countTxt.setText(Integer.toString(count));
-		}
+	    count=settings.getInt(APP_PREFERENCES_COUNT, 0);
+	    word=settings.getString(APP_PREFERENCES_WORD, "Значит");
+	    timerCount=settings.getInt(APP_PREFERENCES_TIMER, 0);
+	    
+		countText.setText(Integer.toString(count));
+		
+		timer.scheduleAtFixedRate(new timerTick(),0,1000);
 		
 		OnClickListener pressCount = new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
 				++count;
-				countTxt.setText(Integer.toString(count));
+				countText.setText(Integer.toString(count));
 				
 				Editor editor = settings.edit();
 				editor.putInt(APP_PREFERENCES_COUNT, count);
@@ -62,7 +106,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				count=0;
-				countTxt.setText(Integer.toString(count));
+				countText.setText(Integer.toString(count));
 				
 				Editor editor = settings.edit();
 				editor.putInt(APP_PREFERENCES_COUNT, count);
@@ -74,6 +118,18 @@ public class MainActivity extends Activity {
 		if(resetBtn != null){
 			resetBtn.setOnClickListener(pressReset);
 		}
+	}
+	
+	public void onPause(){
+		super.onPause();
+		
+		
+	}
+	
+	public void onResume(){
+		super.onResume();
+		
+		
 	}
 
 	@Override
@@ -89,7 +145,7 @@ public class MainActivity extends Activity {
 	    switch (item.getItemId()) {
 	    case R.id.action_reset:
 	    	count=0;
-			countTxt.setText(Integer.toString(count));
+			countText.setText(Integer.toString(count));
 			
 			Editor editor = settings.edit();
 			editor.putInt(APP_PREFERENCES_COUNT, count);

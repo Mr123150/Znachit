@@ -30,14 +30,28 @@
         android:gravity="center"
         android:text="раз(а)" />
     
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/time"
+        android:text="@string/timer_default" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/avg"
+        android:text="@string/average_default" />
+    
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/add"
-        android:textSize="50sp"
+        android:textSize="30sp"
         android:text="Значит"/>
     
     <Button 
@@ -47,7 +61,6 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:id="@+id/reset"
-        android:textSize="30sp"
         android:text="Сбросить"/>
     
 </LinearLayout>
