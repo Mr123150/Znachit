@@ -120,16 +120,30 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	@Override
 	public void onPause(){
 		super.onPause();
 		
 		
 	}
 	
+	@Override
 	public void onResume(){
 		super.onResume();
 		
 		
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		
+		timer.cancel();
+		
+		Editor editor = settings.edit();
+		editor.putInt(APP_PREFERENCES_COUNT, 0);
+		editor.putInt(APP_PREFERENCES_TIMER, 0);
+		editor.apply();
 	}
 
 	@Override
@@ -145,6 +159,7 @@ public class MainActivity extends Activity {
 	    switch (item.getItemId()) {
 	    case R.id.action_reset:
 	    	count=0;
+	    	timerCount=0;
 			countText.setText(Integer.toString(count));
 			
 			Editor editor = settings.edit();
