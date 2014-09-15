@@ -106,6 +106,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				count=0;
+				timerCount=0;
 				countText.setText(Integer.toString(count));
 				
 				Editor editor = settings.edit();
@@ -135,8 +136,8 @@ public class MainActivity extends Activity {
 	}
 	
 	@Override
-	public void onDestroy(){
-		super.onDestroy();
+	public void onStop(){
+		super.onStop();
 		
 		timer.cancel();
 		
@@ -156,6 +157,7 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) 
 	{
+		Intent intent;
 	    switch (item.getItemId()) {
 	    case R.id.action_reset:
 	    	count=0;
@@ -167,7 +169,15 @@ public class MainActivity extends Activity {
 			editor.apply();
 	        return true;
 	    case R.id.action_settings:
-	    	Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+	    	intent = new Intent(MainActivity.this, SettingsActivity.class);
+	        startActivity(intent);
+	        return true;
+	    case R.id.action_about:
+	    	intent = new Intent(MainActivity.this, AboutActivity.class);
+	        startActivity(intent);
+	        return true;
+	    case R.id.action_user:
+	    	intent = new Intent(MainActivity.this, ProfileActivity.class);
 	        startActivity(intent);
 	        return true;
 	    default:

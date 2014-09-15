@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="timer_default">За 0 мин. 0 сек.</string>
-	<string name="average_default">(0 раз/мин., 0 раз за пару)</string>
+    <string name="average_default">(0 раз/мин., 0 раз за пару)</string>
+    <string name="title_activity_about">О программе</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+
 </resources>

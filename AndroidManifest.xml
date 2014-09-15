@@ -24,7 +24,27 @@
         </activity>
         <activity
             android:name="ru.mr123150.znachit.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="ru.mr123150.znachit.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.mr123150.znachit.MainActivity" />
+        </activity>
+        <activity
+            android:name="ru.mr123150.znachit.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName="ru.mr123150.znachit.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.mr123150.znachit.MainActivity" />
+        </activity>
+        <activity
+            android:name="ru.mr123150.znachit.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:parentActivityName="ru.mr123150.znachit.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.mr123150.znachit.MainActivity" />
         </activity>
     </application>
 
