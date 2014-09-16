@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
 	
 	public static final String APP_PREFERENCES = "settings";
 	public static final String APP_PREFERENCES_COUNT = "Count";
+	public static final String APP_PREFERENCES_NAME = "Name";
 	public static final String APP_PREFERENCES_WORD = "Word";
 	public static final String APP_PREFERENCES_TIMER = "Timer";
 	
