@@ -123,24 +123,11 @@ public class MainActivity extends Activity {
 	}
 	
 	@Override
-	public void onPause(){
-		super.onPause();
-		
-		
-	}
-	
-	@Override
-	public void onResume(){
-		super.onResume();
-		
-		
-	}
-	
-	@Override
-	public void onStop(){
+	public void onDestroy(){
 		super.onStop();
 		
 		timer.cancel();
+		timer.purge();
 		
 		Editor editor = settings.edit();
 		editor.putInt(APP_PREFERENCES_COUNT, 0);
